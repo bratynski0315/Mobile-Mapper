@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     let address = "Mount Rushmore"
     let address2 = "McDonald's"
     let geocoder = CLGeocoder()
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,18 +37,8 @@ class ViewController: UIViewController {
                 self.mapView.addAnnotation(annotation)
             }
         }
-//        geocoder.geocodeAddressString(address2) { (placemarks, error) in
-//            for place in placemarks!
-//            {
-//                let annotation2 = MKPointAnnotation()
-//                annotation2.coordinate = (place.location?.coordinate)!
-//                annotation2.title = place.name
-//                self.mapView.addAnnotation(annotation2)
-//            }
-//
-//    }
-
-
+        locationManager.requestWhenInUseAuthorization()
+        mapView.showsUserLocation = true
 }
 
 }

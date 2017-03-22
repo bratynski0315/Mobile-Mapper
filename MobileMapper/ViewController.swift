@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     let herseyAnnotation = MKPointAnnotation()
@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         herseyAnnotation.coordinate = coordinate
         herseyAnnotation.title = "Hersey High School"
         mapView.addAnnotation(herseyAnnotation)
+        mapView.delegate = self
         
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             for place in placemarks!
@@ -40,5 +41,17 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         mapView.showsUserLocation = true
 }
-
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var pin = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        pin.image = UIImage(named: "pic")
+        pin.canShowCallout = true
+        let button = UIButton(type: .detailDisclosure)
+        pin.rightCalloutAccessoryView = button
+        return pin
+    }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        let region = MKCoordinateRegion(center: (view.annotation?.coordinate)!, span: span)
+        mapView.setRegion(region, animated: true)
+    }
 }

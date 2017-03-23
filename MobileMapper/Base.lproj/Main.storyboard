@@ -33,7 +33,13 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pbA-9L-QrQ" secondAttribute="bottom" id="oT7-y8-3I0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ijJ-eh-DAH"/>
+                    <navigationItem key="navigationItem" id="ijJ-eh-DAH">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="refresh" id="ybr-yr-9ZA">
+                            <connections>
+                                <action selector="whenButtonTapped:" destination="BYZ-38-t0r" id="K2W-Py-lZB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="pbA-9L-QrQ" id="d0U-UM-iZS"/>
                     </connections>
@@ -58,7 +64,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L2L-wP-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-79.200000000000003" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-90" y="139"/>
         </scene>
     </scenes>
 </document>

@@ -14,9 +14,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     let herseyAnnotation = MKPointAnnotation()
     let address = "Mount Rushmore"
-    let address2 = "McDonald's"
+    let address2 = "Hiroshima"
     let geocoder = CLGeocoder()
     let locationManager = CLLocationManager()
+    var initialRegion: MKCoordinateRegion!
+    var isInitialMapLoad: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,17 @@ class ViewController: UIViewController, MKMapViewDelegate {
         locationManager.requestWhenInUseAuthorization()
         mapView.showsUserLocation = true
 }
+    @IBAction func whenButtonTapped(_ sender: UIBarButtonItem) {
+        mapView.setRegion(initialRegion, animated: true)
+    }
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        if isInitialMapLoad
+        {
+            initialRegion = MKCoordinateRegion(center: mapView.centerCoordinate, span: mapView.region.span)
+            isInitialMapLoad = false
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var pin = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
         pin.image = UIImage(named: "pic")
